@@ -7,9 +7,15 @@ package VistaClinica;
 
 import ControladorClinica.PersistenciaDoctor;
 import ModeloClinica.Doctor;
+import java.awt.TextField;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.control.PasswordField;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -37,9 +43,9 @@ public class Clinica extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         textUsuario = new javax.swing.JTextField();
-        textContraseña = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         labelEstado = new javax.swing.JLabel();
+        textContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +62,8 @@ public class Clinica extends javax.swing.JFrame {
 
         labelEstado.setText("Sin estado");
 
+        textContraseña.setText("jPasswordField1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -68,11 +76,15 @@ public class Clinica extends javax.swing.JFrame {
                         .addComponent(textUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(39, 39, 39)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addComponent(textContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addComponent(labelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(textContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(0, 72, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -82,11 +94,11 @@ public class Clinica extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(textUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(textContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                .addGap(56, 56, 56)
                 .addComponent(jButton1)
                 .addGap(39, 39, 39)
                 .addComponent(labelEstado)
@@ -110,9 +122,15 @@ public class Clinica extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
             // TODO add your handling code here:
+           
+            
+            char [] p = textContraseña.getPassword();
             String nombre = textUsuario.getText();
-            String pass =textContraseña.getText();
+            String pass =new String(p);
+            
+            System.out.println("El pass es " + pass);
             for(Doctor d : PersistenciaDoctor.leerDoctor()){
+                System.out.println(d.getNombre() + d.getPassword());
                 if(d.getNombre().equals("root") && d.getPassword().equals("root")){
                     new SesionRoot().setVisible(true);
                     this.setVisible(false);
@@ -121,10 +139,8 @@ public class Clinica extends javax.swing.JFrame {
                     this.setVisible(false);
                 }else labelEstado.setText("Datos incorrectos");
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Clinica.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Clinica.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println("Error en " + ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -169,7 +185,7 @@ public class Clinica extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelEstado;
-    private javax.swing.JTextField textContraseña;
+    private javax.swing.JPasswordField textContraseña;
     private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables
 }

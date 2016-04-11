@@ -55,11 +55,12 @@ public class RegistroDoctor extends javax.swing.JFrame {
         labelEstadoRegistroDoctor = new javax.swing.JLabel();
         textEspecialidadDoctor = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        textPasswordDoctor = new javax.swing.JTextField();
         labelImagenPerfil = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         comboTurnoDoctor = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
+        textPasswordDoctor = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,6 +96,15 @@ public class RegistroDoctor extends javax.swing.JFrame {
 
         comboTurnoDoctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Matutino", "Vespertino", "Nocturno" }));
 
+        jButton3.setText("Ventana Principal");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        textPasswordDoctor.setText("jPasswordField1");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,7 +130,7 @@ public class RegistroDoctor extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(textPasswordDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textPasswordDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jButton1)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -136,6 +146,10 @@ public class RegistroDoctor extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +183,9 @@ public class RegistroDoctor extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(labelEstadoRegistroDoctor)
-                .addGap(90, 90, 90))
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -189,13 +205,16 @@ public class RegistroDoctor extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
+            char[] p = textPasswordDoctor.getPassword();
+            
             Integer id= PersistenciaDoctor.generarId();
             Doctor d = new Doctor();
             ImagenPerfilDoctor imagenPerfilDoctor = new ImagenPerfilDoctor();
             AreasDoctor areasDoctor = new AreasDoctor();
             d.setNombre(textNombreDoctor.getText());
             d.setNumeroEmpleado(Integer.parseInt(textNEmpleado.getText()));
-            d.setPassword(textPasswordDoctor.getText());
+            d.setPassword(new String(p));
+            System.out.println("El pass es " + d.getPassword());
             //----
             areasDoctor.setAreaPiso(textEspecialidadDoctor.getSelectedIndex()+1);
             areasDoctor.setEspecialidadDoctor((String) textEspecialidadDoctor.getSelectedItem());
@@ -234,6 +253,12 @@ public class RegistroDoctor extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new SesionRoot().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,6 +269,7 @@ public class RegistroDoctor extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboTurnoDoctor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -255,6 +281,6 @@ public class RegistroDoctor extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> textEspecialidadDoctor;
     private javax.swing.JTextField textNEmpleado;
     private javax.swing.JTextField textNombreDoctor;
-    private javax.swing.JTextField textPasswordDoctor;
+    private javax.swing.JPasswordField textPasswordDoctor;
     // End of variables declaration//GEN-END:variables
 }
