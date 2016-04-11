@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -30,7 +31,7 @@ public class SesionUsuario extends javax.swing.JFrame {
         this.id = id;
         labelNombreDoctor.setText(PersistenciaDoctor.leerDoctor().get(id).getNombre());
         labeEspecialidaDoctor.setText(PersistenciaDoctor.leerDoctor().get(id).getAreasDoctor().getEspecialidadDoctor());
-        
+        labelImagenPerfil.setIcon(new ImageIcon(PersistenciaDoctor.leerDoctor().get(id).getImagenPerfilDoctor().getImagen()));
     }
 
     /**
@@ -47,6 +48,8 @@ public class SesionUsuario extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         labelNombreDoctor = new javax.swing.JLabel();
         labeEspecialidaDoctor = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        labelImagenPerfil = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -79,17 +82,32 @@ public class SesionUsuario extends javax.swing.JFrame {
 
         labeEspecialidaDoctor.setText("jLabel2");
 
+        jButton1.setText("Cerrar Sesion");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(201, 201, 201)
-                .addComponent(jLabel17)
-                .addGap(18, 18, 18)
-                .addComponent(labelNombreDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128)
-                .addComponent(labeEspecialidaDoctor)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(201, 201, 201)
+                        .addComponent(jLabel17)
+                        .addGap(18, 18, 18)
+                        .addComponent(labelNombreDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128)
+                        .addComponent(labeEspecialidaDoctor))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(labelImagenPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(333, 333, 333)
+                        .addComponent(jButton1)))
                 .addContainerGap(166, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -100,7 +118,11 @@ public class SesionUsuario extends javax.swing.JFrame {
                     .addComponent(jLabel17)
                     .addComponent(labelNombreDoctor)
                     .addComponent(labeEspecialidaDoctor))
-                .addContainerGap(347, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(labelImagenPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(64, 64, 64))
         );
 
         jTabbedPane1.addTab("Perfil", jPanel3);
@@ -348,6 +370,12 @@ public class SesionUsuario extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnConsultarPacientesActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new InicioClinica().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,6 +383,7 @@ public class SesionUsuario extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultarPacientes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -374,6 +403,7 @@ public class SesionUsuario extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel labeEspecialidaDoctor;
     private javax.swing.JLabel labelEstado;
+    private javax.swing.JLabel labelImagenPerfil;
     private javax.swing.JLabel labelNombreDoctor;
     private javax.swing.JTextField textEdadPaciente;
     private javax.swing.JTextField textFechaIngreso;
